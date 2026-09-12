@@ -20,6 +20,34 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+        }
+
+        /* Dil Değiştirme Butonu */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background-color: #238636;
+            color: #ffffff;
+            border-color: #238636;
         }
 
         .card {
@@ -88,18 +116,57 @@
 </head>
 <body>
 
-    <div class="card">
-        <span class="badge">Özel Yapay Zeka Sürümü</span>
-        <h1>Kağan AI Projesi</h1>
-        <p>Gelişmiş yapay zeka modeline güvenli erişim sağlayın ve doğrudan indirin.</p>
-        
-        <!-- Yapay Zeka İndirme Bağlantısı -->
-        <a href="https://huggingface.co/kaganx/kagan-ai" class="download-btn" target="_blank">🚀 Model Sayfasına Git ve İndir</a>
+    <!-- Sağ Üst Dil Seçici -->
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
 
-        <div class="footer-text">
-            Korumalı Depo • Tüm Hakları Saklıdır
+    <div class="card">
+        <span class="badge" id="badge">Özel Geliştirilmiş Sürüm</span>
+        <h1 id="title">Kağan AI Yapay Zeka</h1>
+        <p id="desc">Gelişmiş özel yapay zeka modeline erişmek ve hemen indirmek için aşağıdaki butona tıklayın.</p>
+        
+        <a href="https://huggingface.co/kaganx/kagan-ai" class="download-btn" id="btn" target="_blank">🚀 Modeli İndir ve Kullan</a>
+
+        <div class="footer-text" id="footer">
+            © Kağan AI • Özel Lisanslı Yapay Zeka Altyapısı
         </div>
     </div>
+
+    <script>
+        const translations = {
+            tr: {
+                badge: "Özel Geliştirilmiş Sürüm",
+                title: "Kağan AI Yapay Zeka",
+                desc: "Gelişmiş özel yapay zeka modeline erişmek ve hemen indirmek için aşağıdaki butona tıklayın.",
+                btn: "🚀 Modeli İndir ve Kullan",
+                footer: "© Kağan AI • Özel Lisanslı Yapay Zeka Altyapısı"
+            },
+            en: {
+                badge: "Custom Pro Edition",
+                title: "Kağan AI Model",
+                desc: "Access and download the custom advanced AI model directly using the button below.",
+                btn: "🚀 Access & Download Model",
+                footer: "© Kağan AI • Private Licensed AI Infrastructure"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if(lang === 'tr') {
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+            } else {
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+            }
+
+            document.getElementById('badge').innerText = translations[lang].badge;
+            document.getElementById('title').innerText = translations[lang].title;
+            document.getElementById('desc').innerText = translations[lang].desc;
+            document.getElementById('btn').innerText = translations[lang].btn;
+            document.getElementById('footer').innerText = translations[lang].footer;
+        }
+    </script>
 
 </body>
 </html>
